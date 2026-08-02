@@ -1,0 +1,4 @@
+# 평문 데이터는 절대 커밋하지 않음 - bundle.enc.js(암호화됨)만 배포용으로 커밋
+data/*.json
+data/*.js
+!data/bundle.enc.js
