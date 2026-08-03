@@ -15,22 +15,24 @@ from cryptography.hazmat.primitives import hashes
 DATA_DIR = Path(__file__).parent / "data"
 SUBJECT_KEYS = ["ai", "computer_network", "embedded", "info_security", "programming_language", "soft_engineering"]
 FINAL_KEYS = [f"final_{k}" for k in SUBJECT_KEYS]
-SUMMARY_KEYS = ["ai", "computer_network"]
+SUMMARY_KEYS = SUBJECT_KEYS
 
 PBKDF2_ITERATIONS = 200_000
 
-def load(key):
+def load(key, default=None):
     p = DATA_DIR / f"{key}.json"
+    if not p.exists():
+        return default
     with open(p, encoding="utf-8") as f:
         return json.load(f)
 
 def build_bundle():
     quiz = {}
     for k in SUBJECT_KEYS + FINAL_KEYS:
-        quiz[k] = load(k)
+        quiz[k] = load(k, {"subjectKey": k, "subjectName": k, "chapters": []})
     summary = {}
     for k in SUMMARY_KEYS:
-        summary[k] = load(f"summary_{k}")
+        summary[k] = load(f"summary_{k}", {"subjectKey": k, "subjectName": k, "chapters": []})
     return {"quiz": quiz, "summary": summary}
 
 def encrypt(password: str, plaintext: bytes):

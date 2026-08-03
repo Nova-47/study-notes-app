@@ -8,7 +8,7 @@ from pathlib import Path
 DATA_DIR = Path(__file__).parent / "data"
 SUBJECT_KEYS = ["ai", "computer_network", "embedded", "info_security", "programming_language", "soft_engineering"]
 FINAL_KEYS = [f"final_{k}" for k in SUBJECT_KEYS]
-SUMMARY_KEYS = [f"summary_{k}" for k in ["ai", "computer_network"]]
+SUMMARY_KEYS = [f"summary_{k}" for k in SUBJECT_KEYS]
 KEYS = SUBJECT_KEYS + FINAL_KEYS + SUMMARY_KEYS
 
 def convert(key):

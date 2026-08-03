@@ -104,6 +104,10 @@ function render() {
 const SUMMARY_META = [
   { key: "ai", emoji: "🤖" },
   { key: "computer_network", emoji: "🌐" },
+  { key: "embedded", emoji: "🔧" },
+  { key: "info_security", emoji: "🔒" },
+  { key: "programming_language", emoji: "💻" },
+  { key: "soft_engineering", emoji: "🏗️" },
 ];
 
 function getSummaryData(key) {
@@ -207,6 +211,7 @@ function renderSummaryList() {
     <button class="back-link" id="btn-home">&larr; 과목 선택으로</button>
     <div class="card">
       <h2>📖 ${escapeHtml(d.subjectName)} 핵심요약</h2>
+      ${d.generated ? `<div class="meta" style="margin-bottom:14px">※ 이 요약은 원서 발췌가 아니라 새로 정리한 내용입니다</div>` : ""}
       <div class="chapter-list" style="max-height:none">${rows || '<div class="empty-state">아직 준비되지 않았습니다</div>'}</div>
     </div>
   `;
@@ -238,6 +243,7 @@ function renderSummaryRead() {
     <button class="back-link" id="btn-back">&larr; ${escapeHtml(d.subjectName)} 챕터 목록으로</button>
     <div class="card summary-content">
       <h2>${escapeHtml(ch.chapterTitle)}</h2>
+      ${d.generated ? `<div class="meta" style="margin-bottom:14px">※ 새로 정리한 요약입니다 (원서 발췌 아님)</div>` : ""}
       <div class="summary-html">${ch.html || ""}</div>
     </div>
     <div class="footer-nav" style="justify-content:space-between;margin-top:16px">
